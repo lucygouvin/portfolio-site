@@ -136,3 +136,44 @@ footer{
     text-align: center;
     padding: 10px;
 }
+
+/* Styling for tablets */
+@media screen and (max-width: 768px) {
+    /* Smaller h1 font size */
+    h1{
+        color: chartreuse;
+        font-size: 60px;
+    }
+    /* Make the nav links smaller so they're not obviously taller than the h1 */
+    nav ul li{
+        font-size: 14px;
+    }
+    /* Smaller About Me p line height (don't change other p line height) */
+    .about-me p{
+        line-height: 20px;
+    }
+    /* Smaller h3 font size */
+    .app-card h3{
+        font-size: 16px;
+    }
+   
+}
+
+/* Styling for mobile */
+@media screen and (max-width: 425px) {
+    /* Smaller h1 font size */
+    /* Less main padding */
+    /* Adjust placement of h2 */
+    /* Single column of app cards, but first should still be bigger */
+    /* Smaller p line height */
+    /* Smaller h3 font size */
+    h1{
+        color: hotpink;
+    }
+}
+
+/* Styling for landscape? */
+@media screen and (min-width: 30em) and (orientation: landscape) {
+    /* … */
+  }
+  
