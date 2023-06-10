@@ -18,7 +18,11 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 25px 15%;
+    align-items: center;
+    padding: 2% 15%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 h1{
@@ -40,7 +44,7 @@ nav ul li{
 
 
 main{
-    padding: 10px 15% 5% 15%;
+    padding: 2% 15%;
     position: relative;
 
 }
@@ -91,11 +95,12 @@ h2{
 
 .app-card h3{
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    bottom: 5%;
+    left: 2%;
     background-color: rgba(255, 255, 255, 0.5);
-    font-size: 24px;
+    font-size: 22px;
     padding: 10px;
+    max-width: 96%;
 }
 
 .app-card h3 i{
@@ -135,4 +140,86 @@ h2{
 footer{
     text-align: center;
     padding: 10px;
+}
+
+/* Styling for tablets */
+@media screen and (max-width: 768px) {
+    /* Smaller h1 font size */
+    h1{
+        color: chartreuse;
+        font-size: 60px;
+    }
+    /* Make the nav links smaller so they're not obviously taller than the h1 */
+    nav ul li{
+        font-size: 14px;
+    }
+    /* Smaller About Me p line height (don't change other p line height) */
+    .about-me p{
+        line-height: 20px;
+    }
+    /* Smaller h3 font size */
+    .app-card h3{
+        font-size: 16px;
+    }
+    /* when the avatar image is shorter than the h2 element, align-items: normal is closer to being centered than align-items: center due to the rotation of the h2 element  */
+    .contact{
+        align-items: normal;
+    }
+   
+}
+
+/* Styling for mobile */
+@media screen and (max-width: 425px) {
+    /* Smaller h1 font size */
+    h1{
+        color: hotpink;
+        font-size: 38px;
+    }
+    
+    /* Less main  and header padding. At this size, line the header up with the h2, because the difference between the h2 and the p elements is so close that it looks weird not to be lined up with h2 */
+    main{
+        padding: 2% 3% 2% 10%;
+    }
+    header{
+        padding: 2% 3%;
+    }
+    /* Adjust placement and font size of h2 */
+    h2{
+        left: -8%;
+        font-size: 14px;
+    }
+    /* Single column of app cards, but first should still be bigger */
+    .app-card{
+        flex: 0 0 100%;
+        max-height: 110px;
+    }
+
+    .app-card.first-app-card{
+        max-height: 100%;
+    }
+
+    /* Smaller p line height */
+    .about-me p{
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .contact p{
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    footer p{
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    nav ul li{
+        font-size: 12px;
+    }
+    /* Smaller h3 font size */
+    .app-card h3{
+        font-size: 14px;
+    }
+    
 }
