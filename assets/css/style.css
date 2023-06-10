@@ -19,7 +19,10 @@ header{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 15%;
+    padding: 2% 15%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 h1{
@@ -41,7 +44,7 @@ nav ul li{
 
 
 main{
-    padding: 10px 15% 5% 15%;
+    padding: 2% 15%;
     position: relative;
 
 }
@@ -95,7 +98,7 @@ h2{
     bottom: 5%;
     left: 2%;
     background-color: rgba(255, 255, 255, 0.5);
-    font-size: 24px;
+    font-size: 22px;
     padding: 10px;
     max-width: 96%;
 }
@@ -170,12 +173,15 @@ footer{
     /* Smaller h1 font size */
     h1{
         color: hotpink;
-        font-size: 36px;
+        font-size: 38px;
     }
     
-    /* Less main padding */
+    /* Less main  and header padding. At this size, line the header up with the h2, because the difference between the h2 and the p elements is so close that it looks weird not to be lined up with h2 */
     main{
-        padding: 10px 5% 5% 10%;
+        padding: 2% 3% 2% 10%;
+    }
+    header{
+        padding: 2% 3%;
     }
     /* Adjust placement and font size of h2 */
     h2{
@@ -207,15 +213,13 @@ footer{
         font-size: 12px;
         line-height: 14px;
     }
+
+    nav ul li{
+        font-size: 12px;
+    }
     /* Smaller h3 font size */
     .app-card h3{
         font-size: 14px;
     }
     
 }
-
-/* Styling for landscape? */
-@media screen and (min-width: 30em) and (orientation: landscape) {
-    /* … */
-  }
-  
