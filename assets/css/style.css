@@ -1,52 +1,81 @@
+/* Define site color for ease of reuse */
 :root{
-    --yellow: #fefad4;
-    --green: #8fb9a8;
-    --dark-purple: #765d69;
+    --background1: #e4dcd1;
+    --h1_color: #e4dcd1;
+    --nav_hover_color: #eea7aa;
+    --contact_hover_color: #D99393;
+    --color_pop1: #856B71;
+    --text_color: #43051B;
 }
+
+/* Global property definitions for consistent font styling and scroll behavior */
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: var(--dark-purple);
+    color: var(--text_color);
     scroll-behavior: smooth;
 }
 
 body{
-    background-color: var(--yellow);
+    background-color: var(--background1);
 }
 
+/* Flexbox applied to maintain styling between h1 and nav list */
+/* Sticky position to keep it at the top of the screen, z-index to make it appear above other content as it scrolls. Inspiration from: https://codelibrary.opendatasoft.com/components/sticky-header/#code-sticky-content-example-css-content */
 header{
-    background-color: var(--green);
+    background-color: var(--color_pop1);
+    padding: 2% 15%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 2% 15%;
     position: sticky;
     top: 0;
     z-index: 10;
 }
 
 h1{
-    color: whitesmoke;
+    color: var(--h1_color);
     font-size: 72px;
 }
 
+/* Rotated h2 elements, and then offset them to the left. Inspiration for rotating text: https://stackoverflow.com/questions/40205702/how-to-write-vertical-text-from-bottom-to-top-without-using-transform-rotate */
+/* Added border to left side only for more visual separation between the header and the rest of the content */
+h2{
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
+    position: absolute;
+    left: -7%;
+    border-left: 3px solid var(--text_color);
+    text-transform:uppercase;
+    font-size: 20px;
+}
+
+/* Apply flexbox to nav list to control position of link elements */
 nav ul{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 3px;
-    
 }
 
-nav ul li{
+/* Override global font color, add underline */
+nav ul li a{
+    color: var(--h1_color);
     text-decoration: underline;
 }
 
+/* Change color of text when hovered */
+nav a:hover{
+    color: var(--nav_hover_color);
+}
 
 main{
     padding: 2% 15%;
-    position: relative;
+}
 
+/* Direct children of main element should have some additional top margin for more visual separation of  sections */
+main > *{
+    margin: 5% 0;
 }
 
 p{
@@ -54,45 +83,40 @@ p{
     line-height: 25px;
 }
 
-main > *{
-    margin: 5% 0;
-}
-
+/* Set position to relative so h2 element is positioned relative to it */
 .about-me{
     position: relative;
 }
 
+/* Set position to relative so h2 element is positioned relative to it */
+/* Apply flexbox to control the layout of all the .app-card children */
 .work{
     display: flex;
     flex-flow: row wrap;
-    gap: 10px 0px;
+    gap: 15px 0px;
     justify-content: space-between;
     position: relative;
 }
 
-h2{
-    writing-mode: tb-rl;
-    transform: rotate(-180deg);
-    position: absolute;
-    left: -7%;
-    border-left: 3px solid var(--dark-purple);
-    text-transform:uppercase;
-    font-size: 20px;
-}
-
+/* Set position to relative so h3 element is positioned relative to it */
+/* Flex-basis is 48% so that the cards each take up just under half of the parent container, leaving a gap of 2% */
+/* Overflow property hides the edges of the element when the scale transform happens */
 .app-card{
-    border: 2px solid var(--dark-purple);
-    aspect-ratio: 16/9;
+    border: 2px solid var(--text_color);
     max-height: 400px;
     flex: 0 0 48%;
     position: relative;
-    
+    overflow: hidden;
 }
 
+/* Override flex-basis of the rest of the cards so the first one is larger, taking up the whole width of parent element */
 .first-app-card{
     flex: 0 0 100%;
 }
 
+/* Position inside the app-card element */
+/* Semi-transparent white background to not obscure image */
+/* max-width is 96% so there is never less than 2% between the edge of the h3 element and the containing element */
 .app-card h3{
     position: absolute;
     bottom: 5%;
@@ -103,17 +127,36 @@ h2{
     max-width: 96%;
 }
 
+/* Add an underline when h3 is hovered to indicate it is a link */
+.app-card a h3:hover{
+    text-decoration: underline;
+}
+
+/* App name should be lower weight */
 .app-card h3 i{
     font-weight: 100;
 }
 
+/* Image should completely fill the .app-card element. Object-fit: cover makes it so it maintains its aspect ratio as it grows*/
+/* Aspect-ratio forces 16/9 in the case where the uploaded photo does not fit the aspect ratio by default */
+/* Object positioning is adjusting which part of the image shows as it stretches to fill the container. May need individual styling for each card in future. */
+/* webkit-transition controls how the zoom in effect on hover works. Inspired by: https://cssdeck.com/blog/zoom-images-inside-the-container-on-mouse-over-using-css/ */
 .app-card img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    aspect-ratio: 16/9;
+    object-position: 50% 20%;
+    -webkit-transition: 0.6s ease;
 
 }
 
+/* Slightly zoom in images when hovered. Inspired by https://cssdeck.com/blog/zoom-images-inside-the-container-on-mouse-over-using-css/ */
+.app-card:hover img{
+    transform: scale(1.2);
+}
+
+/* Apply flexbox to contact section in order to position the avatar image and the list of contact links */
 .contact{
     display: flex;
     position: relative;
@@ -124,18 +167,21 @@ h2{
     gap: 2%;
 }
 
-.contact section{
-    max-width: 48%;
+/* Change link color when hovered. Different color than nav_hover due to lighter backgorund */
+.contact a:hover{
+    color: var(--contact_hover_color); 
 }
 
+/* Border-radius: 50% turns it into a circle */
+/* Max-width so that the avatar is not dramatically larger than the contact links */
+/* Width and height 100% to preserve aspect ratio */
 .contact img{
     border-radius: 50%;
-    border: 2px solid var(--dark-purple);
+    border: 2px solid var(--text_color);
     max-width: 20%;
-    flex: 0 0 48%;
-
+    width: 100%;
+    height: 100%;
 }
-
 
 footer{
     text-align: center;
@@ -146,33 +192,30 @@ footer{
 @media screen and (max-width: 768px) {
     /* Smaller h1 font size */
     h1{
-        color: chartreuse;
         font-size: 60px;
     }
-    /* Make the nav links smaller so they're not obviously taller than the h1 */
+
+    /* Make the nav links smaller so they're not taller than the h1 */
     nav ul li{
         font-size: 14px;
     }
-    /* Smaller About Me p line height (don't change other p line height) */
-    .about-me p{
+
+    /* Smaller p line height*/
+    p{
         line-height: 20px;
     }
+
     /* Smaller h3 font size */
     .app-card h3{
         font-size: 16px;
-    }
-    /* when the avatar image is shorter than the h2 element, align-items: normal is closer to being centered than align-items: center due to the rotation of the h2 element  */
-    .contact{
-        align-items: normal;
     }
    
 }
 
 /* Styling for mobile */
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 560px) {
     /* Smaller h1 font size */
     h1{
-        color: hotpink;
         font-size: 38px;
     }
     
@@ -183,11 +226,13 @@ footer{
     header{
         padding: 2% 3%;
     }
+
     /* Adjust placement and font size of h2 */
     h2{
         left: -8%;
         font-size: 14px;
     }
+
     /* Single column of app cards, but first should still be bigger */
     .app-card{
         flex: 0 0 100%;
@@ -198,25 +243,15 @@ footer{
         max-height: 100%;
     }
 
-    /* Smaller p line height */
-    .about-me p{
+    /* Smaller p and li line height and font size */
+    p{
         font-size: 12px;
         line-height: 14px;
     }
-
-    .contact p{
-        font-size: 12px;
-        line-height: 14px;
-    }
-
-    footer p{
-        font-size: 12px;
-        line-height: 14px;
-    }
-
     nav ul li{
         font-size: 12px;
     }
+    
     /* Smaller h3 font size */
     .app-card h3{
         font-size: 14px;
